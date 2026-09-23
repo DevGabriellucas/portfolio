@@ -49,9 +49,18 @@ Arquivos em `public/`: foto (`foto-gabriel.webp`), currículo (`curriculo-gabrie
 
 ## Deploy na Vercel
 
-1. Suba este projeto para um repositório no GitHub.
-2. Em vercel.com, **Add New → Project**, importe o repositório e clique em **Deploy** (não precisa configurar nada).
-3. A URL de produção entra sozinha nas meta tags e no sitemap. Em outro host, defina `NEXT_PUBLIC_SITE_URL`.
+No ar em **https://gabriellucas.vercel.app** (projeto `gabriellucas` na Vercel). A pasta já está vinculada ao
+projeto (`.vercel/`, fora do git), então para publicar de novo basta:
+
+```bash
+npx vercel deploy --prod
+```
+
+O `vercel.json` declara `"framework": "nextjs"`: sem isso, um projeto criado pela CLI fica com o preset "Other" e
+publica só a pasta `public/` (todas as rotas davam 404). A URL de produção entra sozinha nas meta tags e no sitemap;
+em outro host, defina `NEXT_PUBLIC_SITE_URL`.
+
+Para publicar a cada `git push`, conecte o repositório do GitHub em Vercel → projeto `gabriellucas` → Settings → Git.
 
 ## Nota sobre o ambiente Windows desta máquina
 
