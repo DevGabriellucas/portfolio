@@ -14,23 +14,23 @@ import { TechIcon } from "@/components/ui/TechIcon";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { PhoneFan } from "@/components/visuals/PhoneFan";
 import { ServicesGraph } from "@/components/visuals/ServicesGraph";
-import { SiteShot } from "@/components/visuals/SiteShot";
 import { SqlFixWindow } from "@/components/visuals/SqlFixWindow";
+import { StackVisual } from "@/components/visuals/StackVisual";
 
 const VISUALS: Record<string, ReactNode> = {
   adm4all: <SqlFixWindow />,
   ecohub: <PhoneFan />,
   "gestor-academico": <ServicesGraph />,
-  "patricia-cake": (
-    <SiteShot
-      src="/projetos/patricia/site.webp"
-      alt="Página inicial do site da Patrícia S. Araújo Cake"
-      url="patricia-tawny.vercel.app"
-      width={976}
-      height={640}
-    />
-  ),
 };
+
+/** Projetos sem ilustracao propria mostram os icones da stack. */
+const visualFor = (projeto: Projeto) => VISUALS[projeto.slug] ?? <StackVisual projeto={projeto} />;
+
+const SELO_TOM = {
+  verde: "border-verde/30 bg-verde/10 text-verde",
+  violeta: "border-violeta/35 bg-violeta/10 text-violeta-claro",
+  ambar: "border-ambar/30 bg-ambar/10 text-ambar",
+} as const;
 
 function ProjectLink({ link }: { link: LinkProjeto }) {
   if (link.tipo === "estudo") {
@@ -72,12 +72,7 @@ function ProjectBody({ projeto, large }: { projeto: Projeto; large?: boolean }) 
         </h3>
         {projeto.selo && (
           <span
-            className={cn(
-              "rounded-full border px-2.5 py-1 font-mono text-[10.5px]",
-              projeto.selo.tom === "verde"
-                ? "border-verde/30 bg-verde/10 text-verde"
-                : "border-violeta/35 bg-violeta/10 text-violeta-claro",
-            )}
+            className={cn("rounded-full border px-2.5 py-1 font-mono text-[10.5px]", SELO_TOM[projeto.selo.tom])}
           >
             {projeto.selo.texto}
           </span>
@@ -133,7 +128,7 @@ function FeaturedProject({ projeto, reverse }: { projeto: Projeto; reverse?: boo
           )}
         >
           <ProjectBody projeto={projeto} large />
-          <div className="relative z-10 min-w-0">{VISUALS[projeto.slug]}</div>
+          <div className="relative z-10 min-w-0">{visualFor(projeto)}</div>
         </div>
       </TiltCard>
     </Reveal>
@@ -145,7 +140,7 @@ function ProjectCard({ projeto, delay }: { projeto: Projeto; delay: number }) {
     <Reveal delay={delay} className="h-full">
       <TiltCard max={4} className="glass border-glow flex h-full flex-col overflow-hidden rounded-[28px] p-6 md:p-8">
         <div className="relative z-10 mb-8 flex min-h-[220px] items-center justify-center rounded-2xl border border-line bg-ink/40 p-4">
-          {VISUALS[projeto.slug]}
+          {visualFor(projeto)}
         </div>
         <ProjectBody projeto={projeto} />
       </TiltCard>
@@ -174,7 +169,7 @@ export function Projects() {
           eyebrow="Projetos"
           title="Projetos que saíram do papel."
           gradient={["papel."]}
-          description="Dois estudos de caso com as decisões, o bug e os números por trás — e outros dois projetos, um em equipe e um para cliente."
+          description="Dois estudos de caso com as decisões, o bug e os números por trás — e mais quatro projetos em equipe, dois deles em andamento na Fábrica de Software."
         />
 
         <div className="mt-16 space-y-6">

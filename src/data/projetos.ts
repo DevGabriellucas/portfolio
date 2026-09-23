@@ -12,7 +12,7 @@ export type Projeto = {
   categoria: string;
   resumo: string;
   contexto: string;
-  selo?: { texto: string; tom: "verde" | "violeta" };
+  selo?: { texto: string; tom: "verde" | "violeta" | "ambar" };
   metricas?: { valor: string; rotulo: string }[];
   contribuicao?: string;
   stack: { nome: string; icone?: BrandIconName }[];
@@ -96,19 +96,54 @@ export const projetos: Projeto[] = [
     destaque: false,
   },
   {
-    slug: "patricia-cake",
-    titulo: "Patrícia S. Araújo Cake",
-    categoria: "Landing page para cliente real",
+    slug: "bemestar60mais",
+    titulo: "BemEstar60+",
+    categoria: "App mobile de saúde para o público 60+",
     resumo:
-      "Site mobile-first para uma confeitaria artesanal: cardápio com filtro por categoria, pedido pelo WhatsApp com mensagem pronta, galeria, FAQ e SEO. O conteúdo fica em arquivos de dados, para a cliente editar sem mexer no código.",
-    contexto: "Entrega para cliente",
+      "Aplicativo em React Native (Expo) para o público 60+ acompanhar a própria saúde, desenvolvido em equipe na Fábrica de Software, com PO e cliente real.",
+    contexto: "Fábrica de Software do Unipê · ciclos 2025.2 e 2026.2",
+    selo: { texto: "Em andamento · ciclo 2026.2", tom: "ambar" },
+    contribuicao:
+      "No ciclo 2025.2 atuei em requisitos com o PO, tarefas por sprint, telas e revisão de código. Agora sigo no projeto no ciclo 2026.2.",
     stack: [
-      { nome: "Next.js", icone: "nextjs" },
+      { nome: "React Native", icone: "react" },
+      { nome: "Expo", icone: "expo" },
       { nome: "TypeScript", icone: "typescript" },
-      { nome: "Tailwind CSS", icone: "tailwindcss" },
-      { nome: "Vercel", icone: "vercel" },
     ],
-    links: [{ tipo: "ao-vivo", rotulo: "Site no ar", href: "https://patricia-tawny.vercel.app" }],
+    links: [{ tipo: "codigo", rotulo: "Código", href: "https://github.com/DevGabriellucas/FS_BemEstar60Mais" }],
+    destaque: false,
+  },
+  {
+    slug: "jogos-empresariais",
+    titulo: "Jogos Empresariais",
+    categoria: "Plataforma de simulações empresariais",
+    resumo:
+      "Plataforma web de jogos e simulações empresariais para desenvolver decisão estratégica em ambiente controlado, com API em Django REST Framework e PostgreSQL.",
+    contexto: "Fábrica de Software do Unipê · ciclo 2026.2",
+    selo: { texto: "Em andamento · ciclo 2026.2", tom: "ambar" },
+    contribuicao:
+      "Projeto que estou desenvolvendo agora. Até aqui: tirei os segredos do repositório e documentei o setup com Docker.",
+    stack: [
+      { nome: "Django", icone: "django" },
+      { nome: "Python", icone: "python" },
+      { nome: "PostgreSQL", icone: "postgresql" },
+      { nome: "Docker", icone: "docker" },
+    ],
+    links: [{ tipo: "codigo", rotulo: "Código", href: "https://github.com/DevGabriellucas/FS_Jogos_Empresariais" }],
+    destaque: false,
+  },
+  {
+    slug: "banco-matuto",
+    titulo: "BancoMatuto",
+    categoria: "Sistema bancário desktop",
+    resumo:
+      "Aplicação bancária em Python com interface gráfica em Tkinter: login, depósito, saque, transferência e consulta de saldo.",
+    contexto: "Projeto acadêmico em equipe · Unipê",
+    stack: [
+      { nome: "Python", icone: "python" },
+      { nome: "Tkinter" },
+    ],
+    links: [{ tipo: "codigo", rotulo: "Código", href: "https://github.com/DevGabriellucas/BancoMatuto_Python" }],
     destaque: false,
   },
 ];
