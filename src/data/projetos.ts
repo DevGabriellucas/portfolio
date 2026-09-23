@@ -108,7 +108,7 @@ export const projetos: Projeto[] = [
       { nome: "Tailwind CSS", icone: "tailwindcss" },
       { nome: "Vercel", icone: "vercel" },
     ],
-    links: [],
+    links: [{ tipo: "ao-vivo", rotulo: "Site no ar", href: "https://patricia-tawny.vercel.app" }],
     destaque: false,
   },
 ];

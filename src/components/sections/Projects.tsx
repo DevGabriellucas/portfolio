@@ -12,16 +12,24 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { buttonGhost, buttonSmall } from "@/components/ui/styles";
 import { TechIcon } from "@/components/ui/TechIcon";
 import { TiltCard } from "@/components/ui/TiltCard";
-import { OrderBubble } from "@/components/visuals/OrderBubble";
 import { PhoneFan } from "@/components/visuals/PhoneFan";
 import { ServicesGraph } from "@/components/visuals/ServicesGraph";
+import { SiteShot } from "@/components/visuals/SiteShot";
 import { SqlFixWindow } from "@/components/visuals/SqlFixWindow";
 
 const VISUALS: Record<string, ReactNode> = {
   adm4all: <SqlFixWindow />,
   ecohub: <PhoneFan />,
   "gestor-academico": <ServicesGraph />,
-  "patricia-cake": <OrderBubble />,
+  "patricia-cake": (
+    <SiteShot
+      src="/projetos/patricia/site.webp"
+      alt="Página inicial do site da Patrícia S. Araújo Cake"
+      url="patricia-tawny.vercel.app"
+      width={976}
+      height={640}
+    />
+  ),
 };
 
 function ProjectLink({ link }: { link: LinkProjeto }) {
