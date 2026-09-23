@@ -14,17 +14,31 @@ import { TechIcon } from "@/components/ui/TechIcon";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { PhoneFan } from "@/components/visuals/PhoneFan";
 import { ServicesGraph } from "@/components/visuals/ServicesGraph";
+import { BrowserShot } from "@/components/visuals/BrowserShot";
+import { LogoVisual } from "@/components/visuals/LogoVisual";
 import { SqlFixWindow } from "@/components/visuals/SqlFixWindow";
 import { StackVisual } from "@/components/visuals/StackVisual";
 
 const VISUALS: Record<string, ReactNode> = {
-  adm4all: <SqlFixWindow />,
+  adm4all: (
+    <div className="flex flex-col gap-4">
+      <BrowserShot
+        src="/projetos/adm4all/dashboard.webp"
+        alt="Painel do coordenador do ADM4All em produção"
+        url="adm4all.extensao-fs.com.br"
+        width={1568}
+        height={600}
+      />
+      <SqlFixWindow className="hidden md:block" />
+    </div>
+  ),
   ecohub: <PhoneFan />,
   "gestor-academico": <ServicesGraph />,
 };
 
-/** Projetos sem ilustracao propria mostram os icones da stack. */
-const visualFor = (projeto: Projeto) => VISUALS[projeto.slug] ?? <StackVisual projeto={projeto} />;
+/** Sem ilustracao propria: logo do projeto, ou os icones da stack. */
+const visualFor = (projeto: Projeto) =>
+  VISUALS[projeto.slug] ?? (projeto.logo ? <LogoVisual projeto={projeto} /> : <StackVisual projeto={projeto} />);
 
 const SELO_TOM = {
   verde: "border-verde/30 bg-verde/10 text-verde",

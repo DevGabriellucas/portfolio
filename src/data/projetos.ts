@@ -16,6 +16,8 @@ export type Projeto = {
   metricas?: { valor: string; rotulo: string }[];
   contribuicao?: string;
   stack: { nome: string; icone?: BrandIconName }[];
+  /** Logo oficial do projeto, usado no card quando não há print. */
+  logo?: { src: string; largura: number; altura: number; fundoClaro?: boolean };
   links: LinkProjeto[];
   destaque: boolean;
 };
@@ -110,6 +112,7 @@ export const projetos: Projeto[] = [
       { nome: "Expo", icone: "expo" },
       { nome: "TypeScript", icone: "typescript" },
     ],
+    logo: { src: "/projetos/bemestar/logo.webp", largura: 707, altura: 259 },
     links: [{ tipo: "codigo", rotulo: "Código", href: "https://github.com/DevGabriellucas/FS_BemEstar60Mais" }],
     destaque: false,
   },
@@ -143,6 +146,7 @@ export const projetos: Projeto[] = [
       { nome: "Python", icone: "python" },
       { nome: "Tkinter" },
     ],
+    logo: { src: "/projetos/bancomatuto/logo.webp", largura: 370, altura: 200, fundoClaro: true },
     links: [{ tipo: "codigo", rotulo: "Código", href: "https://github.com/DevGabriellucas/BancoMatuto_Python" }],
     destaque: false,
   },

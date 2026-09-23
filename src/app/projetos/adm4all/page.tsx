@@ -8,6 +8,7 @@ import { CommitTimeline, type Commit } from "@/components/case-study/CommitTimel
 import { ErDiagram } from "@/components/case-study/ErDiagram";
 import { NextProject } from "@/components/case-study/NextProject";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
+import { BrowserShot } from "@/components/visuals/BrowserShot";
 import { SqlFixWindow } from "@/components/visuals/SqlFixWindow";
 
 export const metadata: Metadata = {
@@ -162,6 +163,30 @@ export default function Adm4allPage() {
             instrutor e a preparação para produção.
           </p>
         </Reveal>
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <figure>
+            <BrowserShot
+              src="/projetos/adm4all/dashboard.webp"
+              alt="Painel do coordenador do ADM4All: alunos, turmas ativas, frequência média e certificados"
+              url="adm4all.extensao-fs.com.br/coordenador/dashboard"
+              width={1568}
+              height={600}
+            />
+            <figcaption className="mt-3 text-sm text-dim">Painel do coordenador, no sistema em produção.</figcaption>
+          </figure>
+          <figure>
+            <BrowserShot
+              src="/projetos/adm4all/cursos.webp"
+              alt="Tela de cursos do ADM4All com carga horária, período letivo e status calculado a partir das turmas"
+              url="adm4all.extensao-fs.com.br/coordenador/cursos"
+              width={1568}
+              height={660}
+            />
+            <figcaption className="mt-3 text-sm text-dim">
+              Cursos: o status sai das turmas a cada consulta, não de uma coluna.
+            </figcaption>
+          </figure>
+        </div>
       </CaseSection>
 
       <CaseSection
