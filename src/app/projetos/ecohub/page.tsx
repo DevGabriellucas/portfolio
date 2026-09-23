@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { EyeOff, ImageOff, Scale, ShieldCheck, Trash2, UserX } from "lucide-react";
 import { CaseHero } from "@/components/case-study/CaseHero";
-import { CaseSection, Code, DecisionCard } from "@/components/case-study/CaseSection";
+import { CaseSection, DecisionCard } from "@/components/case-study/CaseSection";
 import { CostTable } from "@/components/case-study/CostTable";
 import { NextProject } from "@/components/case-study/NextProject";
 import { PhoneGallery } from "@/components/case-study/PhoneGallery";
@@ -176,7 +176,16 @@ export default function EcohubPage() {
           <>
             <p>
               Diante de uma proposta de migrar para Supabase e Postgres, com meta declarada de 30 mil usuários,
-              registrei a decisão num ADR (<Code>docs/adr/0001</Code>): o app continua no Firebase, com Cloud Functions
+              registrei a decisão num{" "}
+              <a
+                href={`${REPO}/blob/main/docs/adr/0001-backend-firebase-vs-supabase.md`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-ciano"
+              >
+                ADR (docs/adr/0001)
+              </a>
+              : o app continua no Firebase, com Cloud Functions
               em TypeScript como a camada de servidor que ainda falta.
             </p>
           </>
