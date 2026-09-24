@@ -41,15 +41,13 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const active = useActiveSection(isHome);
 
+  // A navbar acompanha o scroll o tempo todo; so ganha o fundo "glass" apos rolar um pouco.
   useMotionValueEvent(scrollY, "change", (y) => {
-    const previous = scrollY.getPrevious() ?? 0;
     setScrolled(y > 24);
-    setHidden(y > previous && y > 360);
   });
 
   useEffect(() => {
@@ -77,11 +75,7 @@ export function Header() {
 
   return (
     <>
-      <motion.header
-        className="fixed inset-x-0 top-0 z-50"
-        animate={{ y: hidden && !open ? -110 : 0 }}
-        transition={{ duration: 0.5, ease: EASE_OUT }}
-      >
+      <motion.header className="fixed inset-x-0 top-0 z-50">
         <div className="container-page pt-3 md:pt-4">
           <div
             className={cn(

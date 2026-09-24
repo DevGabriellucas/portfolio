@@ -1,11 +1,13 @@
 "use client";
 
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRef, type ReactNode } from "react";
 import { perfil } from "@/data/perfil";
 import { projetos, type LinkProjeto, type Projeto } from "@/data/projetos";
-import { cn } from "@/lib/utils";
+import { cn, EASE_OUT } from "@/lib/utils";
 import { fixedState, useSceneAnchor } from "@/components/three/useSceneAnchor";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -14,7 +16,6 @@ import { TechIcon } from "@/components/ui/TechIcon";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { PhoneFan } from "@/components/visuals/PhoneFan";
 import { ServicesGraph } from "@/components/visuals/ServicesGraph";
-import { BrowserShot } from "@/components/visuals/BrowserShot";
 import { LogoVisual } from "@/components/visuals/LogoVisual";
 import { SqlFixWindow } from "@/components/visuals/SqlFixWindow";
 import { StackVisual } from "@/components/visuals/StackVisual";
@@ -22,13 +23,22 @@ import { StackVisual } from "@/components/visuals/StackVisual";
 const VISUALS: Record<string, ReactNode> = {
   adm4all: (
     <div className="flex flex-col gap-4">
-      <BrowserShot
-        src="/projetos/adm4all/dashboard.webp"
-        alt="Painel do coordenador do ADM4All em produção"
-        url="adm4all.extensao-fs.com.br"
-        width={1568}
-        height={600}
-      />
+      <motion.div
+        className="flex items-center justify-center rounded-2xl bg-white p-6 shadow-[0_30px_60px_-25px_rgb(0_0_0/0.9)] md:p-10"
+        initial={{ opacity: 0, y: 24, scale: 0.94 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+        transition={{ duration: 0.9, ease: EASE_OUT }}
+      >
+        <Image
+          src="/projetos/adm4all/logo-adm4all.jpeg"
+          alt="Logo do projeto de extensão Administração para Todos (ADM4All)"
+          width={1600}
+          height={1600}
+          sizes="(max-width: 768px) 70vw, 360px"
+          className="h-auto w-full max-w-[320px] animate-float"
+        />
+      </motion.div>
       <SqlFixWindow className="hidden md:block" />
     </div>
   ),

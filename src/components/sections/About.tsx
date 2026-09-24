@@ -153,7 +153,7 @@ export function About() {
             <MapPin className="h-3.5 w-3.5 text-ciano" />
             {perfil.local}
           </FloatingChip>
-          <FloatingChip className="-right-2 top-[46%] md:-right-12" delay={0.15}>
+          <FloatingChip className="-right-3 top-[70%] md:-right-12" delay={0.15}>
             <Award className="h-3.5 w-3.5 text-ambar" />
             Destaque do PO · 2026.1
           </FloatingChip>

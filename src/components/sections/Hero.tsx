@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { motion } from "motion/react";
 import { useRef, type MouseEvent } from "react";
 import { perfil } from "@/data/perfil";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 import { scrollToTarget } from "@/lib/lenis";
 import { clamp, EASE_OUT } from "@/lib/utils";
 import { isMobileViewport } from "@/components/three/sceneStore";
@@ -18,6 +19,74 @@ const item = {
   hidden: { opacity: 0, y: 26 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE_OUT } },
 };
+
+/**
+ * Lupa que fica varrendo o nome, de Gabriel (linha de cima) ate Lucas (linha de baixo).
+ * A lente reaproveita o efeito do cursor (mix-blend-difference inverte as letras embaixo dela);
+ * o cabo de madeira e a virola ficam em elementos separados, SEM blend, para nao inverter a cor.
+ */
+const LENTE = "clamp(3rem,8vw,6rem)"; // diametro da lente
+const RAIO = "clamp(1.5rem,4vw,3rem)"; // metade do diametro
+const CABO_COMP = "clamp(1.5rem,3.6vw,2.7rem)";
+const CABO_LARG = "clamp(0.42rem,1vw,0.62rem)";
+const MADEIRA = "linear-gradient(to bottom,#c89158,#8a5a2c 48%,#5c3a1c)";
+const LATAO = "linear-gradient(to bottom,#f3dd95,#c69a3e 55%,#8a6a22)";
+
+function NameLens() {
+  const reduced = usePrefersReducedMotion();
+  if (reduced) return null;
+  return (
+    <motion.span
+      aria-hidden
+      className="pointer-events-none absolute z-10"
+      style={{ width: LENTE, height: LENTE, translateX: "-50%", translateY: "-50%" }}
+      initial={{ left: "7%", top: "27%", opacity: 0 }}
+      animate={{
+        left: ["7%", "58%", "58%", "9%", "48%", "48%", "7%"],
+        top: ["27%", "27%", "27%", "76%", "76%", "76%", "27%"],
+        opacity: [0, 1, 1, 1, 1, 1, 0],
+      }}
+      transition={{
+        duration: 6.5,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatDelay: 1.4,
+        times: [0, 0.18, 0.34, 0.52, 0.68, 0.84, 1],
+      }}
+    >
+      {/* Cabo + virola: giram 45deg a partir do centro da lente e apontam para baixo-direita. */}
+      <span className="absolute left-1/2 top-1/2" style={{ transform: "rotate(45deg)", transformOrigin: "0 0" }}>
+        {/* virola (encaixe metalico entre a lente e o cabo) */}
+        <span
+          className="absolute rounded-[2px]"
+          style={{
+            left: `calc(${RAIO} - 0.28rem)`,
+            top: "calc(-0.5 * (0.42rem + 0.28rem))",
+            width: "0.6rem",
+            height: "calc(0.42rem + 0.28rem)",
+            background: LATAO,
+            boxShadow: "0 1px 2px rgb(0 0 0/0.45)",
+          }}
+        />
+        {/* cabo de madeira */}
+        <span
+          className="absolute rounded-full"
+          style={{
+            left: `calc(${RAIO} + 0.28rem)`,
+            top: `calc(${CABO_LARG} / -2)`,
+            width: CABO_COMP,
+            height: CABO_LARG,
+            background: MADEIRA,
+            boxShadow: "0 1px 3px rgb(0 0 0/0.45), inset 0 1px 1px rgb(255 255 255/0.25)",
+          }}
+        />
+      </span>
+
+      {/* Lente: o disco que inverte as letras (mesmo efeito da bolinha do cursor). */}
+      <span className="absolute inset-0 rounded-full border border-white/80 bg-white/90 mix-blend-difference" />
+    </motion.span>
+  );
+}
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -66,11 +135,12 @@ export function Hero() {
 
           <motion.h1
             variants={item}
-            className="mt-3 font-display text-[clamp(3.5rem,min(12.5vw,17svh),9.6rem)] font-semibold leading-[0.86] tracking-[-0.05em]"
+            className="relative mt-3 w-fit font-display text-[clamp(3.5rem,min(12.5vw,17svh),9.6rem)] font-semibold leading-[0.86] tracking-[-0.05em]"
           >
             <ScrambleText text="Gabriel" delay={0.3} />
             <br />
             <ScrambleText text="Lucas" delay={0.55} textClassName="text-gradient pr-[0.06em]" />
+            <NameLens />
           </motion.h1>
 
           <motion.p variants={item} className="mt-7 font-display text-xl font-medium md:text-[1.7rem]">
