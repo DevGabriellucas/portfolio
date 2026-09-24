@@ -54,6 +54,19 @@ function NameLens() {
         times: [0, 0.18, 0.34, 0.52, 0.68, 0.84, 1],
       }}
     >
+      {/* Halo de luz: acende as letras embaixo/ao redor da lupa (screen soma luz). */}
+      <span
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{
+          width: `calc(2 * ${LENTE})`,
+          height: `calc(2 * ${LENTE})`,
+          background:
+            "radial-gradient(circle, rgba(90,200,255,0.65) 0%, rgba(139,92,246,0.35) 42%, transparent 70%)",
+          filter: "blur(7px)",
+          mixBlendMode: "screen",
+        }}
+      />
+
       {/* Cabo + virola: giram 45deg a partir do centro da lente e apontam para baixo-direita. */}
       <span className="absolute left-1/2 top-1/2" style={{ transform: "rotate(45deg)", transformOrigin: "0 0" }}>
         {/* virola (encaixe metalico entre a lente e o cabo) */}
@@ -82,8 +95,17 @@ function NameLens() {
         />
       </span>
 
-      {/* Lente: o disco que inverte as letras (mesmo efeito da bolinha do cursor). */}
-      <span className="absolute inset-0 rounded-full border border-white/80 bg-white/90 mix-blend-difference" />
+      {/* Lente de vidro: clareia e satura as letras embaixo (o "destaque" da lupa). */}
+      <span
+        className="absolute inset-0 rounded-full border border-white/70"
+        style={{
+          backdropFilter: "brightness(1.4) saturate(1.6)",
+          WebkitBackdropFilter: "brightness(1.4) saturate(1.6)",
+          background:
+            "radial-gradient(circle at 32% 26%, rgba(255,255,255,0.4), rgba(255,255,255,0.06) 45%, transparent 72%)",
+          boxShadow: "inset 0 0 14px rgb(255 255 255/0.28), 0 2px 10px rgb(0 0 0/0.4)",
+        }}
+      />
     </motion.span>
   );
 }
